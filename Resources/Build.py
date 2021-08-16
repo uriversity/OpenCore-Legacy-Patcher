@@ -538,12 +538,12 @@ class BuildOpenCore:
                 for i, device in enumerate(self.computer.gpus):
                     print(f"- Found dGPU ({i + 1}): {Utilities.friendly_hex(device.vendor_id)}:{Utilities.friendly_hex(device.device_id)}")
                     self.config["#Revision"][f"Hardware-MacPro-dGPU-{i + 1}"] = f"{Utilities.friendly_hex(device.vendor_id)}:{Utilities.friendly_hex(device.device_id)}"
-
+                    self.config["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["boot-args"] += " shikigva=128 unfairgva=1 agdpmod=pikera -wegtree"
                     if device.pci_path:
                         print(f"- Found dGPU ({i + 1}) at {device.pci_path}")
                         if isinstance(device, device_probe.AMD):
                             print("- Adding Mac Pro, Xserve DRM patches")
-                            self.config["DeviceProperties"]["Add"][device.pci_path] = {"shikigva": 128, "unfairgva": 1, "rebuild-device-tree": 1}
+                            #self.config["DeviceProperties"]["Add"][device.pci_path] = {"shikigva": 128, "unfairgva": 1, "rebuild-device-tree": 1}
                         elif isinstance(device, device_probe.NVIDIA):
                             print("- Enabling Nvidia Output Patch")
                             self.config["DeviceProperties"]["Add"][device.pci_path] = {"rebuild-device-tree": 1}
