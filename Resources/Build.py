@@ -543,7 +543,7 @@ class BuildOpenCore:
                         print(f"- Found dGPU ({i + 1}) at {device.pci_path}")
                         if isinstance(device, device_probe.AMD):
                             print("- Adding Mac Pro, Xserve DRM patches")
-                            self.config["DeviceProperties"]["Add"][device.pci_path] = {"shikigva": 128, "unfairgva": 1, "rebuild-device-tree": 1, "agdpmod": "pikera"}
+                            self.config["DeviceProperties"]["Add"][device.pci_path] = {"shikigva": 128, "unfairgva": 1, "rebuild-device-tree": 1, "agdpmod": "vit9696"}
                         elif isinstance(device, device_probe.NVIDIA):
                             print("- Enabling Nvidia Output Patch")
                             self.config["DeviceProperties"]["Add"][device.pci_path] = {"rebuild-device-tree": 1}
